@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { calculateDailyCalorie } from "./Calculators";
 
-const YourComponent = () => {
+const DailyCalories = () => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [weight, setWeight] = useState("");
@@ -109,24 +109,13 @@ const YourComponent = () => {
           {Object.entries(caloriesResult.goals).map(([goal, details]) => (
             <div key={goal}>
               <p>{goal}:</p>
-
-              <div key={`${goal}-gain`}>
-                <p>- Gain Weight: {details?.["gain weight"]}</p>
-                <p>- Calory: {details.calory}</p>
-              </div>
-
-              <div key={`${goal}-loss`}>
-                <p>- Loss Weight: {details?.["loss weight"]}</p>
-                <p>- Calory: {details.calory}</p>
-              </div>
+              <p>{JSON.stringify(details)}</p>
             </div>
           ))}
-
-          {/* Similarly, render other goals as needed */}
         </div>
       )}
     </div>
   );
 };
 
-export default YourComponent;
+export default DailyCalories;
