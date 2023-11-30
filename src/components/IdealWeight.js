@@ -1,24 +1,30 @@
 import React, { useState } from "react";
+import {
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  MenuItem,
+  Link,
+} from "@mui/material";
 import { calculateIdealWeight } from "./Calculators";
 
 const IdealWeight = () => {
   const [gender, setGender] = useState("");
-
   const [height, setHeight] = useState("");
-
   const [idealweightResult, setIdealWeightResult] = useState(null);
   const [error, setError] = useState(null);
 
   const handleCalculateIdealWeight = async () => {
     if (!gender || !height) {
-      setError("Please enter gender /and height.");
+      setError("Please enter gender and height.");
       return;
     }
 
     try {
       const result = await calculateIdealWeight(gender, height);
 
-      setIdealWeightResult(result); // Set the result state
+      setIdealWeightResult(result);
       setError(null);
     } catch (error) {
       setError(error.message);
@@ -26,43 +32,65 @@ const IdealWeight = () => {
   };
 
   return (
-    <div>
-      <label>
-        Gender:
-        <select value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value="">select</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </label>
-      <br />
-      <label>
-        Height (cm):
-        <input
-          type="text"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
-      </label>
-      <br />
+    <Link
+      to="/idealweight" // Replace with your actual route
+      className="idealweight-card" // Replace with your actual class name
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
+      <Typography variant="h4" mb={2}>
+        Calculate Ideal Weight
+      </Typography>
 
-      <button onClick={handleCalculateIdealWeight}>Calculate Body Fat</button>
+      <TextField
+        select
+        label="Gender"
+        variant="outlined"
+        value={gender}
+        onChange={(e) => setGender(e.target.value)}
+        mb={1}
+      >
+        <MenuItem value="">Select</MenuItem>
+        <MenuItem value="male">Male</MenuItem>
+        <MenuItem value="female">Female</MenuItem>
+      </TextField>
 
-      <br />
+      <TextField
+        label="Height (cm)"
+        variant="outlined"
+        type="text"
+        value={height}
+        onChange={(e) => setHeight(e.target.value)}
+        mb={2}
+      />
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <Button variant="contained" onClick={handleCalculateIdealWeight} mb={1}>
+        Calculate Ideal Weight
+      </Button>
+
+      {error && (
+        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+          {error}
+        </Typography>
+      )}
 
       {idealweightResult && (
-        <div>
+        <Stack>
           {Object.entries(idealweightResult).map(([key, value]) => (
-            <div key={key}>
-              <p>{key}:</p>
-              <p>{JSON.stringify(value)}</p>
-            </div>
+            <Stack key={key} spacing={1}>
+              <Typography>{key}:</Typography>
+              <Typography>{JSON.stringify(value)}</Typography>
+            </Stack>
           ))}
-        </div>
+        </Stack>
       )}
-    </div>
+    </Link>
   );
 };
 

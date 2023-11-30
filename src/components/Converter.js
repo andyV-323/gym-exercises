@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Typography, Stack, Button, TextField, Link } from "@mui/material";
 
 const Converter = () => {
   const [pounds, setPounds] = useState("");
@@ -26,43 +27,65 @@ const Converter = () => {
   };
 
   return (
-    <div>
-      <h2>Weight Converter</h2>
-      <label>
-        Pounds:
-        <input
+    <Link
+      to="/converter" // Replace with your actual route
+      className="converter-card" // Replace with your actual class name
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
+      <Typography variant="h4" mb={2}>
+        Weight Converter
+      </Typography>
+
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <TextField
+          label="Pounds"
+          variant="outlined"
           type="text"
           value={pounds}
           onChange={(e) => setPounds(e.target.value)}
         />
-        <button onClick={convertWeight}>Convert to Kilograms</button>
+        <Button variant="contained" onClick={convertWeight}>
+          Convert to Kilograms
+        </Button>
         {kilograms && (
-          <p>{`${pounds} pounds is approximately ${kilograms} kilograms.`}</p>
+          <Typography>{`${pounds} pounds is approximately ${kilograms} kilograms.`}</Typography>
         )}
-      </label>
+      </Stack>
 
-      <h2>Height Converter</h2>
-      <label>
-        Feet:
-        <input
+      <Typography variant="h4" mt={2}>
+        Height Converter
+      </Typography>
+
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <TextField
+          label="Feet"
+          variant="outlined"
           type="text"
           value={feet}
           onChange={(e) => setFeet(e.target.value)}
         />
-      </label>
-      <label>
-        Inches:
-        <input
+        <TextField
+          label="Inches"
+          variant="outlined"
           type="text"
           value={inches}
           onChange={(e) => setInches(e.target.value)}
         />
-        <button onClick={convertHeight}>Convert to Centimeters</button>
+        <Button variant="contained" onClick={convertHeight}>
+          Convert to Centimeters
+        </Button>
         {centimeters && (
-          <p>{`${feet} feet ${inches} inches is approximately ${centimeters} centimeters.`}</p>
+          <Typography>{`${feet} feet ${inches} inches is approximately ${centimeters} centimeters.`}</Typography>
         )}
-      </label>
-    </div>
+      </Stack>
+    </Link>
   );
 };
 

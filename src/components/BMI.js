@@ -1,5 +1,5 @@
-// YourComponent.js
 import React, { useState } from "react";
+import { Typography, TextField, Button, Stack, Link } from "@mui/material";
 import { calculateBMI } from "./Calculators";
 
 const BMI = () => {
@@ -29,46 +29,69 @@ const BMI = () => {
   };
 
   return (
-    <div>
-      <label>
-        Age:
-        <input
-          type="text"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Weight (kg):
-        <input
-          type="text"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Height (cm):
-        <input
-          type="text"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
-      </label>
-      <br />
-      <button onClick={handleCalculateBMI}>Calculate BMI</button>
-      <br />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {bmiResult !== null && (
-        <div>
-          {/* Adjust based on the actual structure of the API response */}
-          <p>BMI Result: {bmiResult.bmi}</p>
-          <p>Health: {bmiResult.health}</p>
-          <p>Healthy BMI Range: {bmiResult.healthy_bmi_range}</p>
-        </div>
+    <Link
+      to="/bmi"
+      className="bmi-card" // Replace with your actual class name
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
+      <Typography variant="h4" mb={2}>
+        Calculate BMI
+      </Typography>
+
+      <TextField
+        label="Age"
+        variant="outlined"
+        type="text"
+        value={age}
+        onChange={(e) => setAge(e.target.value)}
+        mb={1}
+      />
+
+      <TextField
+        label="Weight (kg)"
+        variant="outlined"
+        type="text"
+        value={weight}
+        onChange={(e) => setWeight(e.target.value)}
+        mb={1}
+      />
+
+      <TextField
+        label="Height (cm)"
+        variant="outlined"
+        type="text"
+        value={height}
+        onChange={(e) => setHeight(e.target.value)}
+        mb={2}
+      />
+
+      <Button variant="contained" onClick={handleCalculateBMI} mb={1}>
+        Calculate BMI
+      </Button>
+
+      {error && (
+        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+          {error}
+        </Typography>
       )}
-    </div>
+
+      {bmiResult !== null && (
+        <Stack>
+          <Typography>BMI Result: {bmiResult.bmi}</Typography>
+          <Typography>Health: {bmiResult.health}</Typography>
+          <Typography>
+            Healthy BMI Range: {bmiResult.healthy_bmi_range}
+          </Typography>
+        </Stack>
+      )}
+    </Link>
   );
 };
 

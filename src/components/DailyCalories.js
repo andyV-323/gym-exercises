@@ -1,4 +1,12 @@
 import React, { useState } from "react";
+import {
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  MenuItem,
+  Link,
+} from "@mui/material";
 import { calculateDailyCalorie } from "./Calculators";
 
 const DailyCalories = () => {
@@ -25,10 +33,7 @@ const DailyCalories = () => {
         activitylevel
       );
 
-      // Log the result to console for debugging
-      console.log("daily calorie result:", result);
-
-      setCaloriesResult(result); // Set the result state
+      setCaloriesResult(result);
       setError(null);
     } catch (error) {
       setError(error.message);
@@ -36,85 +41,108 @@ const DailyCalories = () => {
   };
 
   return (
-    <div>
-      <label>
-        Age:
-        <input
-          type="text"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Gender:
-        <select value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value="">select</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </label>
-      <br />
-      <label>
-        Weight (kg):
-        <input
-          type="text"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Height (cm):
-        <input
-          type="text"
-          value={height}
-          onChange={(e) => setHeight(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Activity Level:
-        <select
-          value={activitylevel}
-          onChange={(e) => setLevel(e.target.value)}
-        >
-          <option value="">Select Level</option>
-          <option value="level_1">
-            level _ 1 : “Sedentary: little or no exercise”,
-          </option>
-          <option value="level_2">level _ 2 : “Exercise 1-3 times/week”</option>
-          <option value="level_3">level _ 3 : “Exercise 4-5 times/week”</option>
-          <option value="level_4">
-            level _ 4 : “Daily exercise or intense exercise 3-4 times/week”
-          </option>
-          <option value="level_5">
-            level _ 5 : “Intense exercise 6-7 times/week”
-          </option>
-          <option value="level_6">
-            level _ 6 : “Very intense exercise daily, or physical job"
-          </option>
-        </select>
-      </label>
-      <br />
-      <button onClick={handleCalculateDailyCalories}>
+    <Link
+      to="/dailycalories" // Replace with your actual route
+      className="dailycalories-card" // Replace with your actual class name
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        textDecoration: "none",
+        color: "inherit",
+      }}
+    >
+      <Typography variant="h4" mb={2}>
         Calculate Daily Calories
-      </button>
-      <br />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {caloriesResult !== null && (
-        <div>
-          <p>BMR: {caloriesResult.BMR}</p>
+      </Typography>
+
+      <TextField
+        label="Age"
+        variant="outlined"
+        type="text"
+        value={age}
+        onChange={(e) => setAge(e.target.value)}
+        mb={1}
+      />
+
+      <TextField
+        select
+        label="Gender"
+        variant="outlined"
+        value={gender}
+        onChange={(e) => setGender(e.target.value)}
+        mb={1}
+      >
+        <MenuItem value="">Select</MenuItem>
+        <MenuItem value="male">Male</MenuItem>
+        <MenuItem value="female">Female</MenuItem>
+      </TextField>
+
+      <TextField
+        label="Weight (kg)"
+        variant="outlined"
+        type="text"
+        value={weight}
+        onChange={(e) => setWeight(e.target.value)}
+        mb={1}
+      />
+
+      <TextField
+        label="Height (cm)"
+        variant="outlined"
+        type="text"
+        value={height}
+        onChange={(e) => setHeight(e.target.value)}
+        mb={1}
+      />
+
+      <TextField
+        label="Activity Level"
+        variant="outlined"
+        select
+        value={activitylevel}
+        onChange={(e) => setLevel(e.target.value)}
+        mb={2}
+      >
+        <MenuItem value="">Select Level</MenuItem>
+        <MenuItem value="level_1">Level 1: Sedentary</MenuItem>
+        <MenuItem value="level_2">Level 2: Exercise 1-3 times/week</MenuItem>
+        <MenuItem value="level_3">Level 3: Exercise 4-5 times/week</MenuItem>
+        <MenuItem value="level_4">
+          Level 4: Daily exercise or intense exercise 3-4 times/week
+        </MenuItem>
+        <MenuItem value="level_5">
+          Level 5: Intense exercise 6-7 times/week
+        </MenuItem>
+        <MenuItem value="level_6">
+          Level 6: Very intense exercise daily, or physical job
+        </MenuItem>
+      </TextField>
+
+      <Button variant="contained" onClick={handleCalculateDailyCalories} mb={1}>
+        Calculate Daily Calories
+      </Button>
+
+      {error && (
+        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+          {error}
+        </Typography>
+      )}
+
+      {caloriesResult && (
+        <Stack>
+          <Typography>BMR: {caloriesResult.BMR}</Typography>
 
           {Object.entries(caloriesResult.goals).map(([goal, details]) => (
-            <div key={goal}>
-              <p>{goal}:</p>
-              <p>{JSON.stringify(details)}</p>
-            </div>
+            <Stack key={goal} spacing={1}>
+              <Typography>{goal}:</Typography>
+              <Typography>{JSON.stringify(details)}</Typography>
+            </Stack>
           ))}
-        </div>
+        </Stack>
       )}
-    </div>
+    </Link>
   );
 };
 
