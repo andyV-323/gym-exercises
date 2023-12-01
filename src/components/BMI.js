@@ -1,27 +1,24 @@
-import React, { useState } from "react";
-import { Typography, TextField, Button, Stack, Link } from "@mui/material";
-import { calculateBMI } from "./Calculators";
+import React, { useState } from 'react';
+import { Typography, TextField, Button, Stack, Link } from '@mui/material';
+import { calculateBMI } from './Calculators';
 
 const BMI = () => {
-  const [age, setAge] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
+  const [age, setAge] = useState('');
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
   const [bmiResult, setBmiResult] = useState(null);
   const [error, setError] = useState(null);
 
   const handleCalculateBMI = async () => {
     if (!age || !weight || !height) {
-      setError("Please enter age, weight, and height.");
+      setError('Please enter age, weight, and height.');
       return;
     }
 
     try {
       const result = await calculateBMI(age, weight, height);
 
-      // Log the result to console for debugging
-      console.log("BMI result:", result);
-
-      setBmiResult(result); // Set the result state
+      setBmiResult(result);
       setError(null);
     } catch (error) {
       setError(error.message);
@@ -31,17 +28,22 @@ const BMI = () => {
   return (
     <Link
       to="/bmi"
-      className="bmi-card" // Replace with your actual class name
+      className="bmi-card"
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        textDecoration: "none",
-        color: "inherit",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
     >
-      <Typography variant="h4" mb={2}>
+      <Typography
+        fontWeight={700}
+        sx={{ fontSize: { lg: '44px', xs: '40px' } }}
+        mb="23px"
+        mt="30px"
+      >
         Calculate BMI
       </Typography>
 
@@ -72,12 +74,23 @@ const BMI = () => {
         mb={2}
       />
 
-      <Button variant="contained" onClick={handleCalculateBMI} mb={1}>
+      <Button
+        variant="contained"
+        style={{ backgroundColor: '#FF2625', color: 'white' }}
+        sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+            color: '#FF2625',
+          },
+        }}
+        onClick={handleCalculateBMI}
+        mb={1}
+      >
         Calculate BMI
       </Button>
 
       {error && (
-        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+        <Typography variant="body2" style={{ color: 'red' }} mb={1}>
           {error}
         </Typography>
       )}

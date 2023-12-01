@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Typography,
   TextField,
@@ -6,24 +6,24 @@ import {
   Stack,
   MenuItem,
   Link,
-} from "@mui/material";
-import { calculateBodyFat } from "./Calculators";
+} from '@mui/material';
+import { calculateBodyFat } from './Calculators';
 
 const BodyFat = () => {
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [neck, setNeck] = useState("");
-  const [waist, setWaist] = useState("");
-  const [hip, setHip] = useState("");
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [neck, setNeck] = useState('');
+  const [waist, setWaist] = useState('');
+  const [hip, setHip] = useState('');
   const [bodyfatResult, setBodyFatResult] = useState(null);
   const [error, setError] = useState(null);
 
   const handleCalculateBodyFat = async () => {
     if (!age || !gender || !weight || !height || !neck || !waist || !hip) {
       setError(
-        "Please enter age, gender, weight, height, neck, waist, and hip."
+        'Please enter age, gender, weight, height, neck, waist, and hip.'
       );
       return;
     }
@@ -48,18 +48,23 @@ const BodyFat = () => {
 
   return (
     <Link
-      to="/bodyfat" // Replace with your actual route
-      className="bodyfat-card" // Replace with your actual class name
+      to="/bodyfat"
+      className="bodyfat-card"
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        textDecoration: "none",
-        color: "inherit",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
     >
-      <Typography variant="h4" mb={2}>
+      <Typography
+        fontWeight={700}
+        sx={{ fontSize: { lg: '44px', xs: '40px' } }}
+        mb="23px"
+        mt="30px"
+      >
         Calculate Body Fat
       </Typography>
 
@@ -78,7 +83,10 @@ const BodyFat = () => {
         variant="outlined"
         value={gender}
         onChange={(e) => setGender(e.target.value)}
-        mb={1}
+        sx={{
+          mb: 1,
+          width: '25%',
+        }}
       >
         <MenuItem value="">Select</MenuItem>
         <MenuItem value="male">Male</MenuItem>
@@ -130,12 +138,23 @@ const BodyFat = () => {
         mb={2}
       />
 
-      <Button variant="contained" onClick={handleCalculateBodyFat} mb={1}>
+      <Button
+        variant="contained"
+        style={{ backgroundColor: '#FF2625', color: 'white' }}
+        sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+            color: '#FF2625',
+          },
+        }}
+        onClick={handleCalculateBodyFat}
+        mb={1}
+      >
         Calculate Body Fat
       </Button>
 
       {error && (
-        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+        <Typography variant="body2" style={{ color: 'red' }} mb={1}>
           {error}
         </Typography>
       )}

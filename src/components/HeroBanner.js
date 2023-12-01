@@ -43,6 +43,25 @@ const HeroBanner = () => (
         Explore Exercises
       </a>
     </Stack>
+    <Stack>
+      <a
+        href="/calculators"
+        style={{
+          marginTop: '45px',
+          textDecoration: 'none',
+          width: '200px',
+          textAlign: 'center',
+          background: '#FF2625',
+          padding: '14px',
+          fontSize: '22px',
+          textTransform: 'none',
+          color: 'white',
+          borderRadius: '4px',
+        }}
+      >
+        Fitness Calculators
+      </a>
+    </Stack>
     <Typography
       fontWeight={600}
       color="#FF2625"

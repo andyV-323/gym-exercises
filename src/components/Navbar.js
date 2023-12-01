@@ -1,59 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Stack } from "@mui/material";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
-import Logo from "../assets/images/Logo.png";
+import Logo from '../assets/images/Logo.png';
 
-const Navbar = () => (
-  <Stack
-    direction="row"
-    justifyContent="space-around"
-    sx={{
-      gap: { sm: "123px", xs: "40px" },
-      mt: { sm: "32px", xs: "20px" },
-      justifyContent: "none",
-    }}
-    px="20px"
-  >
-    <Link to="/">
-      <img
-        src={Logo}
-        alt="logo"
-        style={{ width: "48px", height: "48px", margin: "0px 20px" }}
-      />
-    </Link>
+const Navbar = () => {
+  const location = useLocation();
+  const isCalculatorsPage = location.pathname === '/calculators';
+
+  return (
     <Stack
       direction="row"
-      gap="40px"
-      fontFamily="Alegreya"
-      fontSize="24px"
-      alignItems="flex-end"
+      justifyContent="space-around"
+      sx={{
+        gap: { sm: '123px', xs: '40px' },
+        mt: { sm: '32px', xs: '20px' },
+        justifyContent: 'none',
+      }}
+      px="20px"
     >
-      <Link
-        to="/"
-        style={{
-          textDecoration: "none",
-          color: "#3A1212",
-          borderBottom: "3px solid #FF2625",
-        }}
-      >
-        Home
+      <Link to="/">
+        <img
+          src={Logo}
+          alt="logo"
+          style={{ width: '48px', height: '48px', margin: '0px 20px' }}
+        />
       </Link>
-      <a href="#exercises" style={{ textDecoration: "none", color: "#3A1212" }}>
-        Exercises
-      </a>
-      <Link
-        to="/calculators"
-        style={{
-          textDecoration: "none",
-          color: "#3A1212",
-          borderBottom: "3px solid #FF2625",
-        }}
+      <Stack
+        direction="row"
+        gap="40px"
+        fontFamily="Alegreya"
+        fontSize="24px"
+        alignItems="flex-end"
       >
-        Calculators
-      </Link>
+        <Link
+          to="/"
+          style={{
+            textDecoration: 'none',
+            color: '#3A1212',
+            borderBottom: '3px solid #FF2625',
+          }}
+        >
+          Home
+        </Link>
+        {!isCalculatorsPage && (
+          <a
+            href="#exercises"
+            style={{
+              textDecoration: 'none',
+              color: '#3A1212',
+            }}
+          >
+            Exercises
+          </a>
+        )}
+      </Stack>
     </Stack>
-  </Stack>
-);
+  );
+};
 
 export default Navbar;

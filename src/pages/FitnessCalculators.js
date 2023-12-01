@@ -1,63 +1,49 @@
-import React from "react";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import { Box, Typography } from "@mui/material";
+import React from 'react';
+import { Stack, Typography, Box } from '@mui/material';
 
-import BMI from "../components/BMI";
-import BodyFat from "../components/BodyFat";
-import Converter from "../components/Converter";
-import DailyCalories from "../components/DailyCalories";
-import IdealWeight from "../components/IdealWeight";
-
-import RightArrowIcon from "../assets/icons/right-arrow.png";
-import LeftArrowIcon from "../assets/icons/left-arrow.png";
-
-const CustomArrow = ({ onClick, icon, className }) => (
-  <Typography onClick={onClick} className={className}>
-    <img src={icon} alt="arrow" />
-  </Typography>
-);
-
-const LeftArrow = () => {
-  const { scrollPrev } = React.useContext(VisibilityContext);
-  return (
-    <CustomArrow
-      onClick={scrollPrev}
-      icon={LeftArrowIcon}
-      className="right-arrow"
-    />
-  );
-};
-
-const RightArrow = () => {
-  const { scrollNext } = React.useContext(VisibilityContext);
-  return (
-    <CustomArrow
-      onClick={scrollNext}
-      icon={RightArrowIcon}
-      className="left-arrow"
-    />
-  );
-};
+import BMI from '../components/BMI';
+import BodyFat from '../components/BodyFat';
+import Converter from '../components/Converter';
+import DailyCalories from '../components/DailyCalories';
+import IdealWeight from '../components/IdealWeight';
 
 const FitnessCalculators = () => {
   return (
-    <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-      <Box m="0 40px">
-        <Converter />
-      </Box>
-      <Box m="0 40px">
-        <BMI />
-      </Box>
-      <Box m="0 40px">
-        <DailyCalories />
-      </Box>
-      <Box m="0 40px">
-        <BodyFat />
-      </Box>
-      <Box m="0 40px">
-        <IdealWeight />
-      </Box>
-    </ScrollMenu>
+    <Box
+      sx={{ mt: { lg: '212px', xs: '70px' }, ml: { sm: '50px' } }}
+      position="relative"
+      p="20px"
+    >
+      <Typography color="#FF2625" fontWeight="600" fontSize="26px">
+        Fitness Calculators
+      </Typography>
+      <Stack spacing={3}>
+        <Box>
+          <Typography variant="h5" gutterBottom></Typography>
+          <Converter />
+        </Box>
+
+        <Box>
+          <Typography variant="h5" gutterBottom></Typography>
+          <BMI />
+        </Box>
+
+        <Box>
+          <Typography variant="h5" gutterBottom></Typography>
+          <DailyCalories />
+        </Box>
+
+        <Box>
+          <Typography variant="h5" gutterBottom></Typography>
+          <BodyFat />
+        </Box>
+
+        <Box>
+          <Typography variant="h5" gutterBottom></Typography>
+          <IdealWeight />
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

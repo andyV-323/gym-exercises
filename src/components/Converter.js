@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Typography, Stack, Button, TextField, Link } from "@mui/material";
+import React, { useState } from 'react';
+import { Typography, Stack, Button, TextField, Link } from '@mui/material';
 
 const Converter = () => {
-  const [pounds, setPounds] = useState("");
-  const [kilograms, setKilograms] = useState("");
-  const [feet, setFeet] = useState("");
-  const [inches, setInches] = useState("");
-  const [centimeters, setCentimeters] = useState("");
+  const [pounds, setPounds] = useState('');
+  const [kilograms, setKilograms] = useState('');
+  const [feet, setFeet] = useState('');
+  const [inches, setInches] = useState('');
+  const [centimeters, setCentimeters] = useState('');
 
   const convertWeight = () => {
     const poundsValue = parseFloat(pounds);
@@ -31,19 +31,24 @@ const Converter = () => {
       to="/converter" // Replace with your actual route
       className="converter-card" // Replace with your actual class name
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        textDecoration: "none",
-        color: "inherit",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
     >
-      <Typography variant="h4" mb={2}>
+      <Typography
+        fontWeight={700}
+        sx={{ fontSize: { lg: '44px', xs: '40px' } }}
+        mb="23px"
+        mt="30px"
+      >
         Weight Converter
       </Typography>
 
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="column" alignItems="center" spacing={1}>
         <TextField
           label="Pounds"
           variant="outlined"
@@ -51,7 +56,17 @@ const Converter = () => {
           value={pounds}
           onChange={(e) => setPounds(e.target.value)}
         />
-        <Button variant="contained" onClick={convertWeight}>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: '#FF2625', color: 'white' }}
+          sx={{
+            '&:hover': {
+              backgroundColor: 'white',
+              color: '#FF2625',
+            },
+          }}
+          onClick={convertWeight}
+        >
           Convert to Kilograms
         </Button>
         {kilograms && (
@@ -59,11 +74,16 @@ const Converter = () => {
         )}
       </Stack>
 
-      <Typography variant="h4" mt={2}>
+      <Typography
+        fontWeight={700}
+        sx={{ fontSize: { lg: '44px', xs: '40px' } }}
+        mb="23px"
+        mt="30px"
+      >
         Height Converter
       </Typography>
 
-      <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack direction="column" alignItems="center" spacing={1}>
         <TextField
           label="Feet"
           variant="outlined"
@@ -78,7 +98,17 @@ const Converter = () => {
           value={inches}
           onChange={(e) => setInches(e.target.value)}
         />
-        <Button variant="contained" onClick={convertHeight}>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: '#FF2625', color: 'white' }}
+          sx={{
+            '&:hover': {
+              backgroundColor: 'white',
+              color: '#FF2625',
+            },
+          }}
+          onClick={convertHeight}
+        >
           Convert to Centimeters
         </Button>
         {centimeters && (

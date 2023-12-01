@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Typography,
   TextField,
@@ -6,18 +6,18 @@ import {
   Stack,
   MenuItem,
   Link,
-} from "@mui/material";
-import { calculateIdealWeight } from "./Calculators";
+} from '@mui/material';
+import { calculateIdealWeight } from './Calculators';
 
 const IdealWeight = () => {
-  const [gender, setGender] = useState("");
-  const [height, setHeight] = useState("");
+  const [gender, setGender] = useState('');
+  const [height, setHeight] = useState('');
   const [idealweightResult, setIdealWeightResult] = useState(null);
   const [error, setError] = useState(null);
 
   const handleCalculateIdealWeight = async () => {
     if (!gender || !height) {
-      setError("Please enter gender and height.");
+      setError('Please enter gender and height.');
       return;
     }
 
@@ -36,15 +36,20 @@ const IdealWeight = () => {
       to="/idealweight" // Replace with your actual route
       className="idealweight-card" // Replace with your actual class name
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        textDecoration: "none",
-        color: "inherit",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
     >
-      <Typography variant="h4" mb={2}>
+      <Typography
+        fontWeight={700}
+        sx={{ fontSize: { lg: '44px', xs: '40px' } }}
+        mb="23px"
+        mt="30px"
+      >
         Calculate Ideal Weight
       </Typography>
 
@@ -54,7 +59,10 @@ const IdealWeight = () => {
         variant="outlined"
         value={gender}
         onChange={(e) => setGender(e.target.value)}
-        mb={1}
+        sx={{
+          mb: 1,
+          width: '25%', // Adjust the width relative to other text fields
+        }}
       >
         <MenuItem value="">Select</MenuItem>
         <MenuItem value="male">Male</MenuItem>
@@ -70,12 +78,23 @@ const IdealWeight = () => {
         mb={2}
       />
 
-      <Button variant="contained" onClick={handleCalculateIdealWeight} mb={1}>
+      <Button
+        variant="contained"
+        style={{ backgroundColor: '#FF2625', color: 'white' }}
+        sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+            color: '#FF2625',
+          },
+        }}
+        onClick={handleCalculateIdealWeight}
+        mb={1}
+      >
         Calculate Ideal Weight
       </Button>
 
       {error && (
-        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+        <Typography variant="body2" style={{ color: 'red' }} mb={1}>
           {error}
         </Typography>
       )}

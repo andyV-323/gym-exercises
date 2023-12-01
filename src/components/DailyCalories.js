@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Typography,
   TextField,
@@ -6,21 +6,21 @@ import {
   Stack,
   MenuItem,
   Link,
-} from "@mui/material";
-import { calculateDailyCalorie } from "./Calculators";
+} from '@mui/material';
+import { calculateDailyCalorie } from './Calculators';
 
 const DailyCalories = () => {
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [activitylevel, setLevel] = useState("");
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [activitylevel, setLevel] = useState('');
   const [caloriesResult, setCaloriesResult] = useState(null);
   const [error, setError] = useState(null);
 
   const handleCalculateDailyCalories = async () => {
     if (!age || !gender || !weight || !height || !activitylevel) {
-      setError("Please enter age, gender, weight, height, and level.");
+      setError('Please enter age, gender, weight, height, and level.');
       return;
     }
 
@@ -45,15 +45,20 @@ const DailyCalories = () => {
       to="/dailycalories" // Replace with your actual route
       className="dailycalories-card" // Replace with your actual class name
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        textDecoration: "none",
-        color: "inherit",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
     >
-      <Typography variant="h4" mb={2}>
+      <Typography
+        fontWeight={700}
+        sx={{ fontSize: { lg: '44px', xs: '40px' } }}
+        mb="23px"
+        mt="30px"
+      >
         Calculate Daily Calories
       </Typography>
 
@@ -72,7 +77,10 @@ const DailyCalories = () => {
         variant="outlined"
         value={gender}
         onChange={(e) => setGender(e.target.value)}
-        mb={1}
+        sx={{
+          mb: 1,
+          width: '25%', // Adjust the width relative to other text fields
+        }}
       >
         <MenuItem value="">Select</MenuItem>
         <MenuItem value="male">Male</MenuItem>
@@ -103,7 +111,10 @@ const DailyCalories = () => {
         select
         value={activitylevel}
         onChange={(e) => setLevel(e.target.value)}
-        mb={2}
+        sx={{
+          mb: 1,
+          width: '40%', // Adjust the width relative to other text fields
+        }}
       >
         <MenuItem value="">Select Level</MenuItem>
         <MenuItem value="level_1">Level 1: Sedentary</MenuItem>
@@ -120,12 +131,23 @@ const DailyCalories = () => {
         </MenuItem>
       </TextField>
 
-      <Button variant="contained" onClick={handleCalculateDailyCalories} mb={1}>
+      <Button
+        variant="contained"
+        style={{ backgroundColor: '#FF2625', color: 'white' }}
+        sx={{
+          '&:hover': {
+            backgroundColor: 'white',
+            color: '#FF2625',
+          },
+        }}
+        onClick={handleCalculateDailyCalories}
+        mb={1}
+      >
         Calculate Daily Calories
       </Button>
 
       {error && (
-        <Typography variant="body2" style={{ color: "red" }} mb={1}>
+        <Typography variant="body2" style={{ color: 'red' }} mb={1}>
           {error}
         </Typography>
       )}
