@@ -63,6 +63,7 @@ const HeroBanner = () => {
             color: 'white',
             borderRadius: '4px',
             fontFamily: 'Josefin Sans',
+            borderStyle: 'none',
           }}
         >
           Fitness Calculators
